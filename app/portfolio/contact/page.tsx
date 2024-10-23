@@ -25,7 +25,7 @@ export default function ContactMe() {
       <Card className="rounded w-full max-w-md bg-gray-800 border-gray-700">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold">Get in touch</CardTitle>
-          <CardDescription>Send me a message and I'll get back to you as soon as possible.</CardDescription>
+          <CardDescription>Send me a message and I&apos;ll get back to you as soon as possible.</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">

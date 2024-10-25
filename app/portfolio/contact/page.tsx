@@ -1,19 +1,28 @@
 "use client";
 
-import emailjs from "@emailjs/browser";
 import { useEffect, useState } from "react";
+import emailjs from "@emailjs/browser";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardContent, CardTitle, CardDescription } from "@/components/ui/card";
-import { Send } from "lucide-react";
+import { Send, Loader2 } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import { type ToastProps } from "@/components/ui/toast"
+
+const greenToast: ToastProps = {
+  className: "bg-green-800 rounded text-white border-green-600",
+  duration: 3000,
+}
 
 export default function ContactMe() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
 
   useEffect(() => {
     emailjs.init({
@@ -21,10 +30,10 @@ export default function ContactMe() {
     });
   }, []);
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
   
-    // Define the parameters to be sent
     const templateParams = {
       name,
       email,
@@ -32,23 +41,33 @@ export default function ContactMe() {
       message,
     };
   
-    // Send email using EmailJS
-    emailjs
-      .send(process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!, process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!, templateParams)
-      .then(
-        (response) => {
-          console.log("Email sent successfully:", response.status, response.text);
-          alert("Your message has been sent!");
-          setName("");
-          setEmail("");
-          setSubject("");
-          setMessage("");
-        },
-        (error) => {
-          console.error("Failed to send email:", error);
-          alert("Failed to send message, please try again later.");
-        }
+    try {
+      const response = await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        templateParams
       );
+      
+      console.log("Email sent successfully:", response.status, response.text);
+      toast({
+        title: "Message Sent",
+        description: "Your message has been sent successfully!",
+        ...greenToast
+      });
+      setName("");
+      setEmail("");
+      setSubject("");
+      setMessage("");
+    } catch (error) {
+      console.error("Failed to send email:", error);
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -75,7 +94,7 @@ export default function ContactMe() {
               <Label htmlFor="email" className="text-sm font-medium">Your email</Label>
               <Input
                 id="email"
-                type="text"
+                type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -106,8 +125,17 @@ export default function ContactMe() {
             <Button
               type="submit"
               className="rounded w-full bg-gray-700 hover:bg-gray-600 text-white transition-colors duration-300"
+              disabled={isLoading}
             >
-              <Send className="w-4 h-4 mr-2" /> Send Message
+              {isLoading ? (
+                <>
+                  <Loader2 className="w-4 h-4 mr-2 animate-spin" /> Sending...
+                </>
+              ) : (
+                <>
+                  <Send className="w-4 h-4 mr-2" /> Send Message
+                </>
+              )}
             </Button>
           </form>
         </CardContent>

@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { Github, Instagram, Linkedin } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { Toaster } from "@/components/ui/toaster"
 
 export default function PortfolioLayout({
   children,
@@ -79,6 +80,7 @@ export default function PortfolioLayout({
       <main className="container mx-auto mt-24 px-4">
           {children}
       </main>
+      <Toaster />
     </div>
   )
 }

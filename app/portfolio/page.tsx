@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
+import Image from "next/image";
 
 export default function AboutMe() {
     const [content, setContent] = useState('');
@@ -16,9 +17,11 @@ export default function AboutMe() {
         <div className="animate-fade-in prose prose-base mx-auto text-white">
             {/* Reduce vertical margin between image and markdown */}
             <div className="flex justify-center items-center mb-4"> {/* mb-4 adds small margin below the image */}
-                <img
+                <Image 
                     src="/profile.jpg"
-                    alt="Profile picture"
+                    alt="Profile picture" 
+                    width={200}
+                    height={200}
                     className="rounded-full w-64 h-64 object-cover"
                 />
             </div>

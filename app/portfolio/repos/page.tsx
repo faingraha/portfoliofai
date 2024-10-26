@@ -1,9 +1,10 @@
 'use client';
 
-import GitHubReposCarousel from "@/components/github-repos-carousel";
 import { useEffect, useState } from "react";
+import GitHubReposCarousel from "@/components/github-repos-carousel";
 import Repo from "@/models/repo"
 import { Github } from "lucide-react";
+import { LoadingWrapper } from '@/components/loading-wrapper';
 
 interface RawRepo {
     id: number
@@ -20,6 +21,7 @@ const CACHE_EXPIRATION = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 export default function GithubRepos() {
     const [repos, setRepos] = useState<Repo[]>([])
     const [error, setError] = useState<string | null>(null)
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         const fetchRepos = async () => {
@@ -30,6 +32,7 @@ export default function GithubRepos() {
                     const { data, timestamp } = JSON.parse(cachedData);
                     if (Date.now() - timestamp < CACHE_EXPIRATION) {
                         setRepos(data);
+                        setIsLoading(false);
                         return;
                     }
                 }
@@ -70,6 +73,8 @@ export default function GithubRepos() {
                 setRepos(reposWithLanguages)
             } catch (e) {
                 setError(e instanceof Error ? e.message : 'An unknown error occurred')
+            } finally {
+                setIsLoading(false)
             }
         }
 
@@ -81,18 +86,20 @@ export default function GithubRepos() {
     }
 
     return (
-        <div className="animate-fade-in">
-            <div className="text-center mt-24">
-                <a href="https://github.com/RonGissin"
-                   target="_blank" 
-                   rel="noopener noreferrer" 
-                   className="inline-block text-white p-2 transition-colors duration-300">
-                    <Github size={100} />
-                </a>
+        <LoadingWrapper isLoading={isLoading}>
+            <div className="animate-fade-in">
+                <div className="text-center mt-24">
+                    <a href="https://github.com/RonGissin"
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       className="inline-block text-white p-2 transition-colors duration-300">
+                        <Github size={100} />
+                    </a>
+                </div>
+                <div className="-mt-48">
+                    <GitHubReposCarousel repos={repos} />
+                </div>
             </div>
-            <div className="-mt-48">
-                <GitHubReposCarousel repos={repos} />
-            </div>
-        </div>
+        </LoadingWrapper>
     );
 }

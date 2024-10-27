@@ -47,7 +47,7 @@ export default function PortfolioLayout({
           {/* Left Side - Title and Nav Items */}
           <div className="flex items-center space-x-8">
             <h1 className="text-2xl relative -top-0.5 text-white">Ron Gissin</h1>
-            <div className="hidden md:flex space-x-8">
+            <div className="hidden lg:flex space-x-8">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
@@ -64,7 +64,7 @@ export default function PortfolioLayout({
           </div>
 
           {/* Right Side - Social Links (Desktop) */}
-          <div className="hidden md:flex space-x-4">
+          <div className="hidden lg:flex space-x-4">
             {socialLinks.map((link, index) => (
               <a
                 key={index}
@@ -80,7 +80,7 @@ export default function PortfolioLayout({
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-white"
+            className="lg:hidden text-white"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -89,7 +89,7 @@ export default function PortfolioLayout({
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 space-y-4">
+          <div className="lg:hidden mt-4 space-y-4">
             {navItems.map((item) => (
               <Link
                 key={item.href}

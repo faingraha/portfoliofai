@@ -14,15 +14,25 @@ export default function PortfolioLayout({
   const pathname = usePathname()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [showFooter, setShowFooter] = useState(true)
+  const [lastScrollY, setLastScrollY] = useState(0)
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0)
+      const currentScrollY = window.scrollY
+      setIsScrolled(currentScrollY > 0)
+      
+      if (currentScrollY > lastScrollY) {
+        setShowFooter(false)
+      } else {
+        setShowFooter(true)
+      }
+      setLastScrollY(currentScrollY)
     }
 
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [lastScrollY])
 
   const navItems = [
     { href: '/portfolio', label: 'About me', newTab: false },
@@ -119,9 +129,16 @@ export default function PortfolioLayout({
           </div>
         )}
       </nav>
-      <main className="container mx-auto mt-24 px-4">
+      <main className="container mx-auto mt-24 px-4 pb-16">
         {children}
       </main>
+      <footer className={`fixed bottom-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled ? 'bg-black/40 backdrop-blur-md' : 'bg-black'
+      } p-4 text-center ${showFooter ? 'translate-y-0' : 'translate-y-full'}`}>
+        <p className="text-sm text-gray-400">
+          &copy; {new Date().getFullYear()} rongissin.dev
+        </p>
+      </footer>
       <Toaster />
     </div>
   )

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Button } from "@/components/ui/button";
 import { Download } from 'lucide-react';
-import { LoadingWrapper } from '@/components/loading-wrapper';
+import { LoadingWrapper } from '@/components/ui/loading-wrapper';
 
 export default function CV() {
   const [content, setContent] = useState('');

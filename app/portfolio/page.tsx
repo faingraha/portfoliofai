@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import Image from "next/image";
-import { LoadingWrapper } from '@/components/loading-wrapper';
+import { LoadingWrapper } from '@/components/ui/loading-wrapper';
 
 export default function AboutMe() {
     const [content, setContent] = useState('');
@@ -11,15 +11,15 @@ export default function AboutMe() {
 
     useEffect(() => {
         fetch('/about_me.md')
-        .then((response) => response.text())
-        .then((text) => {
-            setContent(text);
-            setIsLoading(false);
-        })
-        .catch((error) => {
-            console.error('Error loading markdown:', error);
-            setIsLoading(false);
-        });
+            .then((response) => response.text())
+            .then((text) => {
+                setContent(text);
+                setIsLoading(false);
+            })
+            .catch((error) => {
+                console.error('Error loading markdown:', error);
+                setIsLoading(false);
+            });
     }, []);
 
     return (

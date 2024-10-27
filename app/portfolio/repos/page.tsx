@@ -1,22 +1,11 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import GitHubReposCarousel from "@/components/github-repos-carousel";
+import GitHubReposCarousel from "@/components/ui/github-repos-carousel";
 import Repo from "@/models/repo"
 import { Github } from "lucide-react";
-import { LoadingWrapper } from '@/components/loading-wrapper';
-
-interface RawRepo {
-    id: number
-    name: string
-    description: string
-    html_url: string
-    languages_url: string
-    fork: boolean
-}
-
-const CACHE_KEY = 'github_repos_cache';
-const CACHE_EXPIRATION = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+import { LoadingWrapper } from '@/components/ui/loading-wrapper';
+import { GithubClient } from '@/lib/github/github-client';
 
 export default function GithubRepos() {
     const [repos, setRepos] = useState<Repo[]>([])
@@ -25,61 +14,19 @@ export default function GithubRepos() {
 
     useEffect(() => {
         const fetchRepos = async () => {
+            const githubClient = new GithubClient();
             try {
-                // Check if we have cached data
-                const cachedData = localStorage.getItem(CACHE_KEY);
-                if (cachedData) {
-                    const { data, timestamp } = JSON.parse(cachedData);
-                    if (Date.now() - timestamp < CACHE_EXPIRATION) {
-                        setRepos(data);
-                        setIsLoading(false);
-                        return;
-                    }
-                }
-
-                // If no valid cache, fetch from API
-                const response = await fetch('https://api.github.com/users/RonGissin/repos')
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`)
-                }
-                const data: RawRepo[] = await response.json()
-                
-                if (!Array.isArray(data)) {
-                    throw new Error('Data is not an array')
-                }
-
-                const nonForkedRepos = data.filter(repo => !repo.fork)
-                const reposWithLanguages = await Promise.all(nonForkedRepos.map(async (repo) => {
-                    const langResponse = await fetch(repo.languages_url)
-                    if (!langResponse.ok) {
-                        throw new Error(`HTTP error! status: ${langResponse.status}`)
-                    }
-                    const langData = await langResponse.json()
-                    return {
-                        id: repo.id,
-                        name: repo.name,
-                        description: repo.description,
-                        html_url: repo.html_url,
-                        languages: Object.keys(langData)
-                    } as Repo
-                }))
-
-                // Cache the fetched data
-                localStorage.setItem(CACHE_KEY, JSON.stringify({
-                    data: reposWithLanguages,
-                    timestamp: Date.now()
-                }));
-
-                setRepos(reposWithLanguages)
+                const reposData = await githubClient.GetRepos('RonGissin', false);
+                setRepos(reposData);
             } catch (e) {
-                setError(e instanceof Error ? e.message : 'An unknown error occurred')
+                setError(e instanceof Error ? e.message : 'An unknown error occurred');
             } finally {
-                setIsLoading(false)
+                setIsLoading(false);
             }
-        }
+        };
 
-        fetchRepos()
-    }, [])
+        fetchRepos();
+    }, []);
 
     if (error) {
         return <div>Error: {error}</div>

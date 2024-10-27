@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Github, Instagram, Linkedin } from 'lucide-react'
+import { Github, Instagram, Linkedin, Menu, X } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { Toaster } from "@/components/ui/toaster"
@@ -13,6 +13,7 @@ export default function PortfolioLayout({
 }) {
   const pathname = usePathname()
   const [isScrolled, setIsScrolled] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,61 +25,102 @@ export default function PortfolioLayout({
   }, [])
 
   const navItems = [
-    { href: '/portfolio', label: 'About me' },
-    { href: '/portfolio/cv', label: 'Get my CV' },
-    { href: '/portfolio/repos', label: 'Repos' },
-    { href: '/portfolio/contact', label: 'Contact me' },
+    { href: '/portfolio', label: 'About me', newTab: false },
+    { href: '/portfolio/cv', label: 'Get my CV', newTab: false },
+    { href: '/portfolio/repos', label: 'Repos', newTab: false },
+    { href: '/portfolio/contact', label: 'Contact me', newTab: false },
+    { href: 'https://rongissin.hashnode.dev/', label: 'Blog', newTab: true }
+  ]
+
+  const socialLinks = [
+    { href: "https://www.instagram.com/ron_gissin", icon: Instagram, bgClass: "bg-instagram-gradient" },
+    { href: "https://github.com/RonGissin", icon: Github, bgClass: "bg-purple-600 hover:bg-purple-800" },
+    { href: "https://www.linkedin.com/in/ron-gissin-984176157/", icon: Linkedin, bgClass: "bg-[#0077B5] hover:bg-[#005582]" },
   ]
 
   return (
     <div className="bg-black text-gray-300 min-h-screen font-mono">
-      <nav className=
-        {`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-            isScrolled ? 'bg-black/40 backdrop-blur-md' : 'bg-black'
-        } p-4 animate-fade-in`}>
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled ? 'bg-black/40 backdrop-blur-md' : 'bg-black'
+      } p-4 animate-fade-in`}>
         <div className="container mx-auto flex justify-between items-center">
-          {/* Left Side - Title */}
+          {/* Left Side - Title and Nav Items */}
           <div className="flex items-center space-x-8">
             <h1 className="text-2xl relative -top-0.5 text-white">Ron Gissin</h1>
-            <div className="space-x-8">
+            <div className="hidden md:flex space-x-8">
               {navItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  target={item.newTab ? "_blank" : undefined}
+                  className={`hover:text-gray-300 ${
+                    pathname === item.href ? 'text-gray-100' : 'text-gray-400'
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Right Side - Social Links (Desktop) */}
+          <div className="hidden md:flex space-x-4">
+            {socialLinks.map((link, index) => (
+              <a
+                key={index}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`inline-block text-white rounded p-2 ${link.bgClass}`}
+              >
+                <link.icon size={24} />
+              </a>
+            ))}
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden text-white"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden mt-4 space-y-4">
+            {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`hover:text-gray-300 ${
+                target={item.newTab ? "_blank" : undefined}
+                className={`block hover:text-gray-300 ${
                   pathname === item.href ? 'text-gray-100' : 'text-gray-400'
                 }`}
+                onClick={() => setIsMobileMenuOpen(false)}
               >
                 {item.label}
               </Link>
             ))}
+            <div className="flex space-x-4 mt-4">
+              {socialLinks.map((link, index) => (
+                <a
+                  key={index}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`inline-block text-white rounded p-2 ${link.bgClass}`}
+                >
+                  <link.icon size={24} />
+                </a>
+              ))}
             </div>
           </div>
-          <div className="space-x-4">
-            <a href="https://www.instagram.com/ron_gissin"
-               target="_blank" 
-               rel="noopener noreferrer" 
-               className="inline-block bg-instagram-gradient text-white rounded p-2">
-              <Instagram size={24} />
-            </a>
-            <a href="https://github.com/RonGissin"
-               target="_blank" 
-               rel="noopener noreferrer" 
-               className="inline-block bg-purple-600 hover:bg-purple-800 text-white rounded p-2">
-              <Github size={24} />
-            </a>
-            <a
-                href="https://www.linkedin.com/in/ron-gissin-984176157/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block bg-[#0077B5] hover:bg-[#005582] text-white rounded p-2">
-                <Linkedin size={24} />
-            </a>
-          </div>
-        </div>
+        )}
       </nav>
       <main className="container mx-auto mt-24 px-4">
-          {children}
+        {children}
       </main>
       <Toaster />
     </div>

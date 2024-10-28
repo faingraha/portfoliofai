@@ -56,7 +56,7 @@ export default function PortfolioLayout({
         <div className="container mx-auto flex justify-between items-center">
           {/* Left Side - Title and Nav Items */}
           <div className="flex items-center space-x-8">
-            <h1 className="text-2xl relative -top-0.5 text-white">Ron Gissin</h1>
+            <h1 className="text-2xl relative -top-0.5 text-white">RonGissin.Dev()</h1>
             <div className="hidden lg:flex space-x-8">
               {navItems.map((item) => (
                 <Link

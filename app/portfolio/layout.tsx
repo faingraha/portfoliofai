@@ -37,7 +37,7 @@ export default function PortfolioLayout({
   // Hanya menu About me dan Blog yang tersisa
   const navItems = [
     { href: '/portfolio', label: 'About me', newTab: false },
-    { href: 'https://rfainugraha.wordpress.comm/', label: 'Blog', newTab: true }
+    { href: 'https://fainugraha.wordpress.com/', label: 'Blog', newTab: true }
   ]
 
   const socialLinks = [

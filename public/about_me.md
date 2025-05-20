@@ -1,15 +1,14 @@
 ## About Me
 
-I'm **Ron Gissin**, a passionate **Security Software Engineer** specializing in large-scale, cloud-native applications. At **Microsoft**, I've developed pivotal cloud security solutions that protect critical infrastructures worldwide, with achievements like **agentless machine scanning** in **Azure** to enhance security without requiring agents on virtual machines.
+Hello! **I'm Muhamad Fai Nugraha** , currently a dedicated student **SMKN 1 Kota Bekasi** in the  **Computer Network Engineering program.** My passion lies deeply in the fields of **system administration and networking**, where I continuously strive to expand my skills and knowledge. I have a particular enthusiasm for Linux, appreciating its versatility and power as an operating system, and I am also highly interested in Cisco technologies, which are essential in the world of professional networking.
 
 ---
 
-With expertise in **Cloud Service Posture Management (CSPM)**, **vulnerability management**, and **server protection**, I design and deploy resilient, high-performance systems. My technical focus includes **Kubernetes**, **serverless runtimes**, and both **batch** and **stream processing** to handle massive data flows and optimize cloud security architecture.
+Throughout my studies, I have focused on understanding network protocols, configuring routers and switches, and managing network security. I am eager to apply what I learn in real-world environments and aim to become a competent sysadmin or network engineer in the future.
 
 ---
 
-Outside of work, I enjoy playing and composing music, photography, and skiing.
+Beyond my academic pursuits, I have a fun and somewhat unique hobby — I enjoy typing, and I’ve developed the ability to type at an impressive speed of up to 120 words per minute. This skill helps me stay productive and efficient in my work and studies.
 
 ---
 
-[Contact me!](portfolio/contact)

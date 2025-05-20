@@ -21,9 +21,9 @@ export default function LandingPage() {
             {mounted && (
               <TypeAnimation
                 sequence={[
-                  "Hi, I'm Ron Gissin.",
+                  "Hi, I'm Fai.",
                   1200,
-                  "A software engineer looking to build interesting things.",
+                  "A computer networking student passionate about IT and technology.",
                   700,
                   () => setShowButton(true),
                 ]}

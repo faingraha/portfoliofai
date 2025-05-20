@@ -34,18 +34,16 @@ export default function PortfolioLayout({
     return () => window.removeEventListener('scroll', handleScroll)
   }, [lastScrollY])
 
+  // Hanya menu About me dan Blog yang tersisa
   const navItems = [
     { href: '/portfolio', label: 'About me', newTab: false },
-    { href: '/portfolio/cv', label: 'Get my CV', newTab: false },
-    { href: '/portfolio/repos', label: 'Repos', newTab: false },
-    { href: '/portfolio/contact', label: 'Contact me', newTab: false },
-    { href: 'https://rongissin.hashnode.dev/', label: 'Blog', newTab: true }
+    { href: 'https://rfainugraha.wordpress.comm/', label: 'Blog', newTab: true }
   ]
 
   const socialLinks = [
-    { href: "https://www.instagram.com/ron_gissin", icon: Instagram, bgClass: "bg-instagram-gradient" },
-    { href: "https://github.com/RonGissin", icon: Github, bgClass: "bg-purple-600 hover:bg-purple-800" },
-    { href: "https://www.linkedin.com/in/ron-gissin-984176157/", icon: Linkedin, bgClass: "bg-[#0077B5] hover:bg-[#005582]" },
+    { href: "https://www.instagram.com/faingraha", icon: Instagram, bgClass: "bg-instagram-gradient" },
+    { href: "https://github.com/faingraha", icon: Github, bgClass: "bg-purple-600 hover:bg-purple-800" },
+    { href: "https://www.linkedin.com/in/fainugraha/", icon: Linkedin, bgClass: "bg-[#0077B5] hover:bg-[#005582]" },
   ]
 
   return (
@@ -56,7 +54,7 @@ export default function PortfolioLayout({
         <div className="container mx-auto flex justify-between items-center">
           {/* Left Side - Title and Nav Items */}
           <div className="flex items-center space-x-8">
-            <h1 className="text-2xl relative -top-0.5 text-white">RonGissin.Dev()</h1>
+            <h1 className="text-2xl relative -top-0.5 text-white">Faingraha</h1>
             <div className="hidden lg:flex space-x-8">
               {navItems.map((item) => (
                 <Link
@@ -136,7 +134,7 @@ export default function PortfolioLayout({
         isScrolled ? 'bg-black/40 backdrop-blur-md' : 'bg-black'
       } p-4 text-center ${showFooter ? 'translate-y-0' : 'translate-y-full'}`}>
         <p className="text-sm text-gray-400">
-          &copy; {new Date().getFullYear()} rongissin.dev
+          &copy; {new Date().getFullYear()} Muhamad Fai Nugraha
         </p>
       </footer>
       <Toaster />

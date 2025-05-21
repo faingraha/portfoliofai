@@ -36,9 +36,10 @@ export default function PortfolioLayout({
 
   // Hanya menu About me dan Blog yang tersisa
   const navItems = [
-    { href: '/portfolio', label: 'About me', newTab: false },
-    { href: 'https://fainugraha.wordpress.com/', label: 'Blog', newTab: true }
-  ]
+  { href: '/portfolio', label: 'About me', newTab: false },
+  { href: 'https://www.notion.so/Learning-Hub-1fa9f35cd4ea800c987ad3ca9f8b6e98', label: 'Learning Hub', newTab: true },
+  { href: 'https://fainugraha.wordpress.com/', label: 'Blog', newTab: true }
+]
 
   const socialLinks = [
     { href: "https://www.instagram.com/faingraha", icon: Instagram, bgClass: "bg-instagram-gradient" },

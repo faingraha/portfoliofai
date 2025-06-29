@@ -24,7 +24,7 @@ export default function AboutMe() {
 
     return (
         <LoadingWrapper isLoading={isLoading}>
-            <div className="animate-fade-in prose prose-base mx-auto text-white">
+            <div className="animate-fade-in prose prose-base mx-auto text-white text-justify">
                 <div className="flex justify-center items-center mb-4">
                     <Image 
                         src="/profile.jpg"

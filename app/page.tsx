@@ -23,8 +23,6 @@ export default function LandingPage() {
                 sequence={[
                   "Hello there.",
                   1200,
-                  "A computer networking student passionate about IT and technology.",
-                  700,
                   () => setShowButton(true),
                 ]}
                 wrapper="span"

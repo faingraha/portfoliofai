@@ -1,6 +1,6 @@
 ## About Me
 
-Hello! **I'm Muhamad Fai Nugraha**, currently a dedicated student at **SMKN 1 Kota** Bekasi, enrolled in the **Computer Network Engineering program.** My passion lies deeply in the fields of **system administration and networking**, where I continuously strive to expand my skills and knowledge. I have a particular enthusiasm for Linux, appreciating its versatility and power as an operating system, and I am also highly interested in Cisco technologies, which are essential in the world of professional networking.
+I'm **Muhamad Fai Nugraha**, currently a dedicated student at **SMKN 1 Kota** Bekasi, enrolled in the **Computer Network Engineering program.** My passion lies deeply in the fields of **system administration and networking**, where I continuously strive to expand my skills and knowledge. I have a particular enthusiasm for Linux, appreciating its versatility and power as an operating system, and I am also highly interested in Cisco technologies, which are essential in the world of professional networking.
 
 ---
 

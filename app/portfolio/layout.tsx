@@ -37,7 +37,6 @@ export default function PortfolioLayout({
   // Hanya menu About me dan Blog yang tersisa
   const navItems = [
   { href: '/portfolio', label: 'About me', newTab: false },
-  { href : '/portfolio/cv', label: 'Mastery', newTab: false },
   { href: 'https://fainugraha.notion.site/Learning-Hub-1fb9f35cd4ea80a8b505c4fb17f5dbcd?pvs=4', label: 'Learning Hub', newTab: true },
   { href: 'https://fainugraha.wordpress.com/', label: 'Blog', newTab: true }
 ]

@@ -44,6 +44,7 @@ export default function LandingPage() {
                     "Hello there.",
                     () => setShowButton(true),
                   ]}
+                  speed={10}
                   wrapper="span"
                   cursor={true}
                   repeat={0}

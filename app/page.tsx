@@ -35,7 +35,7 @@ export default function LandingPage() {
         <span className="animate-blink">|</span>
       </h1>
 
-      {/* Tombol Enter */}
+      {/* Tombol Enter lebih besar */}
       <div
         className={`transition-all duration-700 ${
           showButton
@@ -47,7 +47,7 @@ export default function LandingPage() {
           variant="outline"
           size="lg"
           asChild
-          className="text-white border-gray-700 bg-black hover:bg-white hover:text-black transition-all duration-300 text-lg px-10 py-5 font-medium"
+          className="text-xl px-14 py-6 font-mono text-white border-gray-700 bg-black hover:bg-white hover:text-black transition-all duration-300"
         >
           <Link href="/portfolio">Enter</Link>
         </Button>

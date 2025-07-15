@@ -27,15 +27,15 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col justify-center items-center px-4 font-mono">
-      {/* Teks animasi */}
-      <h1 className="text-4xl md:text-6xl font-medium tracking-wide mb-10">
+      {/* Animasi teks "Hello there." */}
+      <h1 className="text-2xl md:text-4xl font-medium tracking-wide mb-10">
         <span className="whitespace-pre bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
           {text}
         </span>
         <span className="animate-blink">|</span>
       </h1>
 
-      {/* Tombol Enter */}
+      {/* Tombol Enter ukuran kecil */}
       <div
         className={`transition-all duration-700 ${
           showButton
@@ -45,9 +45,9 @@ export default function LandingPage() {
       >
         <Button
           variant="outline"
-          size="lg"
+          size="sm"
           asChild
-          className="text-white border-gray-700 bg-black hover:bg-white hover:text-black transition-all duration-300 text-lg px-10 py-5 font-medium"
+          className="text-sm px-6 py-2 font-mono text-white border-gray-700 bg-black hover:bg-white hover:text-black transition-all duration-300"
         >
           <Link href="/portfolio">Enter</Link>
         </Button>

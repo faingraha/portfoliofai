@@ -60,3 +60,20 @@ body {
 .bg-instagram-gradient:hover {
   background: linear-gradient(45deg, rgba(131, 58, 180, 0.6), rgba(193, 53, 132, 0.6), rgba(225, 48, 108, 0.6), rgba(247, 119, 55, 0.6));
 }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Tambahkan di bawah ini */
+@layer utilities {
+  .animate-blink {
+    animation: blink 1s steps(2, start) infinite;
+  }
+
+  @keyframes blink {
+    to {
+      visibility: hidden;
+    }
+  }
+}
